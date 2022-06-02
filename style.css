@@ -1,0 +1,24 @@
+html,
+body {
+	min-height: 100vh;
+}
+
+.calculatorContainer,
+.buttonContainer,
+.left,
+.numbers,
+.special,
+.operators {
+	display: flex;
+	justify-content: space-between;
+}
+
+.calculatorContainer,
+.left,
+.operators {
+	flex-direction: column;
+}
+
+.calculatorContainer>* {
+	flex: 1;
+}
