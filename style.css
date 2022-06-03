@@ -3,22 +3,46 @@ body {
 	min-height: 100vh;
 }
 
+h1,
+body {
+	margin: 0;
+}
+
 .calculatorContainer,
 .buttonContainer,
-.left,
-.numbers,
-.special,
-.operators {
+.display,
+body {
 	display: flex;
 	justify-content: space-between;
 }
 
-.calculatorContainer,
-.left,
-.operators {
+.calculatorContainer {
+	width: 50vw;
+	height: 75vh;
+}
+
+body,
+.calculatorContainer {
 	flex-direction: column;
 }
 
-.calculatorContainer>* {
-	flex: 1;
+.display,
+.buttonContainer {
+	flex-wrap: wrap;
+}
+
+.buttonContainer * {
+	width: 10vw;
+}
+
+.display {
+	height: 15vh;
+}
+
+.buttonContainer {
+	height: 60vh;
+}
+
+body {
+	align-items: center;
 }
