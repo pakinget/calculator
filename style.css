@@ -1,11 +1,22 @@
-html,
-body {
-	min-height: 100vh;
+@font-face {
+	font-family: ArchitectsDaughter;
+	src: url(ArchitectsDaughter.ttf);
 }
 
-h1,
+html,
 body {
+	min-height: 92vh;
+}
+
+h1 {
 	margin: 0;
+	font-family: "ArchitectsDaughter";
+	font-size: 5vh;
+}
+
+body {
+	margin: 4vh 0;
+	align-items: center;
 }
 
 .calculatorContainer,
@@ -41,8 +52,4 @@ body,
 
 .buttonContainer {
 	height: 60vh;
-}
-
-body {
-	align-items: center;
 }
