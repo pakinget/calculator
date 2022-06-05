@@ -62,3 +62,14 @@ body,
 .buttonContainer {
 	height: 60vh;
 }
+
+.buttonContainer * {
+	background-color: #E6DDBE;
+	border: none;
+	font-size: 7vh;
+}
+
+button:hover {
+	background-color: #998D60;
+	cursor: pointer;
+}
