@@ -1,3 +1,8 @@
+let firstOperand = [],
+	secondOperand = [],
+	operator;
+const buttons = document.querySelectorAll("button");
+
 function add(a, b) {
 	return a + b;
 }
@@ -38,3 +43,18 @@ function operate(a, b, operator) {
 	else if (operator == "/") return divide(a, b);
 	else return factorial(a);
 }
+
+buttons.forEach((item) => {
+	if (item.classList.contains("operand")) {
+		item.addEventListener("click", () => {
+			if (operator == undefined) firstOperand[firstOperand.length] = item.textContent;
+			else secondOperand[secondOperand.length] = item.textContent;
+		});
+	}
+	else if (item.classList.contains("operator")) {
+		item.addEventListener("click", () => {
+			operator = item.textContent;
+		});
+	}
+	else console.log("aboba");
+});
