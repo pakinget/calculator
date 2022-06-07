@@ -79,5 +79,10 @@ buttons.forEach((item) => {
 			refreshDisplay();
 		});
 	}
-	else console.log("aboba");
+	else if (item.textContent == "c") {
+		item.addEventListener("click", () => {
+			refreshVariables();
+			refreshDisplay();
+		});
+	}
 });
