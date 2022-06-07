@@ -1,4 +1,4 @@
-let firstOperand, secondOperand, operator;
+let firstOperand, activeOperand, operator;
 
 function add(a, b) {
 	return a + b;
@@ -42,15 +42,14 @@ function operate(a, b, operator) {
 }
 
 function refreshVariables(result = []) {
-	firstOperand = result;
-	secondOperand = [];
+	activeOperand = result;
+	firstOperand = [];
 	operator = undefined;
 }
 
 function refreshDisplay() {
 	const display = document.querySelector(".display");
-	if (operator == undefined) display.textContent = firstOperand.join("");
-	else display.textContent = secondOperand.join("");
+	display.textContent = activeOperand.join("");
 }
 
 const buttons = document.querySelectorAll("button");
@@ -60,20 +59,21 @@ refreshVariables();
 buttons.forEach((item) => {
 	if (item.classList.contains("operand")) {
 		item.addEventListener("click", () => {
-			if (operator == undefined) firstOperand[firstOperand.length] = item.textContent;
-			else secondOperand[secondOperand.length] = item.textContent;
+			activeOperand[activeOperand.length] = item.textContent;
 			refreshDisplay();
 		});
 	}
 	else if (item.classList.contains("operator")) {
 		item.addEventListener("click", () => {
 			operator = item.textContent;
+			firstOperand = activeOperand;
+			activeOperand = [];
 			refreshDisplay();
 		});
 	}
 	else if (item.textContent == "=") {
 		item.addEventListener("click", () => {
-			const result = operate(Number(firstOperand.join("")), Number(secondOperand.join("")), operator);
+			const result = operate(Number(firstOperand.join("")), Number(activeOperand.join("")), operator);
 			const resultArr = result.toString().split("");
 			refreshVariables(resultArr);
 			refreshDisplay();
@@ -82,6 +82,12 @@ buttons.forEach((item) => {
 	else if (item.textContent == "c") {
 		item.addEventListener("click", () => {
 			refreshVariables();
+			refreshDisplay();
+		});
+	}
+	else if (item.textContent == "del") {
+		item.addEventListener("click", () => {
+			activeOperand.pop();
 			refreshDisplay();
 		});
 	}
