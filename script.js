@@ -1,7 +1,4 @@
-let firstOperand = [],
-	secondOperand = [],
-	operator;
-const buttons = document.querySelectorAll("button");
+let firstOperand, secondOperand, operator;
 
 function add(a, b) {
 	return a + b;
@@ -44,16 +41,42 @@ function operate(a, b, operator) {
 	else return factorial(a);
 }
 
+function refreshVariables(result = []) {
+	firstOperand = result;
+	secondOperand = [];
+	operator = undefined;
+}
+
+function refreshDisplay() {
+	const display = document.querySelector(".display");
+	if (operator == undefined) display.textContent = firstOperand.join("");
+	else display.textContent = secondOperand.join("");
+}
+
+const buttons = document.querySelectorAll("button");
+
+refreshVariables();
+
 buttons.forEach((item) => {
 	if (item.classList.contains("operand")) {
 		item.addEventListener("click", () => {
 			if (operator == undefined) firstOperand[firstOperand.length] = item.textContent;
 			else secondOperand[secondOperand.length] = item.textContent;
+			refreshDisplay();
 		});
 	}
 	else if (item.classList.contains("operator")) {
 		item.addEventListener("click", () => {
 			operator = item.textContent;
+			refreshDisplay();
+		});
+	}
+	else if (item.textContent == "=") {
+		item.addEventListener("click", () => {
+			const result = operate(Number(firstOperand.join("")), Number(secondOperand.join("")), operator);
+			const resultArr = result.toString().split("");
+			refreshVariables(resultArr);
+			refreshDisplay();
 		});
 	}
 	else console.log("aboba");
