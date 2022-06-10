@@ -106,4 +106,12 @@ buttons.forEach((item) => {
 			refreshDisplay();
 		});
 	}
+	else if (item.classList.contains("factorial")) {
+		item.addEventListener("click", () => {
+			const result = operate(Number(activeOperand.join("")), "!");
+			const resultArr = result.toString().split("");
+			refreshVariables(resultArr);
+			refreshDisplay();
+		});
+	}
 });
