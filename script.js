@@ -1,5 +1,3 @@
-let firstOperand, activeOperand, operator;
-
 function add(a, b) {
 	return a + b;
 }
@@ -45,12 +43,24 @@ function refreshVariables(result = []) {
 	activeOperand = result;
 	firstOperand = [];
 	operator = undefined;
+	changeElementState(".equal", true);
+	if (activeOperand.indexOf(".") != -1) changeElementState(".dot", true);
+	else changeElementState(".dot", false);
 }
 
 function refreshDisplay() {
 	const display = document.querySelector(".display");
 	display.textContent = activeOperand.join("");
 }
+
+function changeElementState(selector, state) {
+	const elements = document.querySelectorAll(selector);
+	elements.forEach((item) => {
+		item.disabled = state;
+	});
+}
+
+let firstOperand, activeOperand, operator;
 
 const buttons = document.querySelectorAll("button");
 
@@ -60,6 +70,8 @@ buttons.forEach((item) => {
 	if (item.classList.contains("operand")) {
 		item.addEventListener("click", () => {
 			activeOperand[activeOperand.length] = item.textContent;
+			if (activeOperand[0] != undefined && firstOperand[0] != undefined) changeElementState(".equal", false);
+			if (item.classList.contains("dot")) changeElementState(".dot", true);
 			refreshDisplay();
 		});
 	}
@@ -68,10 +80,11 @@ buttons.forEach((item) => {
 			operator = item.textContent;
 			firstOperand = activeOperand;
 			activeOperand = [];
+			changeElementState(".dot", false);
 			refreshDisplay();
 		});
 	}
-	else if (item.textContent == "=") {
+	else if (item.classList.contains("equal")) {
 		item.addEventListener("click", () => {
 			const result = operate(Number(firstOperand.join("")), Number(activeOperand.join("")), operator);
 			const resultArr = result.toString().split("");
@@ -79,15 +92,16 @@ buttons.forEach((item) => {
 			refreshDisplay();
 		});
 	}
-	else if (item.textContent == "c") {
+	else if (item.classList.contains("clear")) {
 		item.addEventListener("click", () => {
 			refreshVariables();
 			refreshDisplay();
 		});
 	}
-	else if (item.textContent == "del") {
+	else if (item.classList.contains("delete")) {
 		item.addEventListener("click", () => {
-			activeOperand.pop();
+			const popped = activeOperand.pop();
+			if (popped == ".") changeElementState(".dot", false);
 			refreshDisplay();
 		});
 	}
