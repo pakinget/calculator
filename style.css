@@ -51,6 +51,7 @@ body,
 	width: 10vw;
 }
 
+/* Yes, I simply hid the overflow. Big numbers SMELL! */
 .display {
 	height: 15vh;
 	background-color: #EDEFFF;
@@ -58,6 +59,7 @@ body,
 	justify-content: flex-end;
 	align-content: center;
 	font-size: 7vh;
+	overflow: hidden;
 }
 
 .buttonContainer {
