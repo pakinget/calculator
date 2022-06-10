@@ -45,6 +45,7 @@ function refreshVariables(result = []) {
 	operator = undefined;
 	changeElementState(".equal", true);
 	if (activeOperand.indexOf(".") != -1) changeElementState(".dot", true);
+	else if (activeOperand.length == 0) changeElementState(".dot", true);
 	else changeElementState(".dot", false);
 }
 
@@ -70,6 +71,7 @@ buttons.forEach((item) => {
 	if (item.classList.contains("operand")) {
 		item.addEventListener("click", () => {
 			activeOperand[activeOperand.length] = item.textContent;
+			if (activeOperand.length == 1) changeElementState(".dot", false);
 			if (activeOperand[0] != undefined && firstOperand[0] != undefined) changeElementState(".equal", false);
 			if (item.classList.contains("dot")) changeElementState(".dot", true);
 			refreshDisplay();
@@ -102,7 +104,10 @@ buttons.forEach((item) => {
 		item.addEventListener("click", () => {
 			const popped = activeOperand.pop();
 			if (popped == ".") changeElementState(".dot", false);
-			else if (activeOperand.indexOf(popped)) changeElementState(".equal", true);
+			if (activeOperand.indexOf(popped)) {
+				changeElementState(".equal", true);
+				changeElementState(".dot", true);
+			}
 			refreshDisplay();
 		});
 	}
