@@ -120,4 +120,11 @@ buttons.forEach((item) => {
 			refreshDisplay();
 		});
 	}
+	else if (item.classList.contains("plusMin")) {
+		item.addEventListener("click", () => {
+			if (activeOperand.indexOf("-") == -1) activeOperand.unshift("-");
+			else activeOperand.shift();
+			refreshDisplay();
+		});
+	}
 });
