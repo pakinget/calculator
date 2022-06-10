@@ -102,6 +102,7 @@ buttons.forEach((item) => {
 		item.addEventListener("click", () => {
 			const popped = activeOperand.pop();
 			if (popped == ".") changeElementState(".dot", false);
+			else if (activeOperand.indexOf(popped)) changeElementState(".equal", true);
 			refreshDisplay();
 		});
 	}
